@@ -1,27 +1,43 @@
 import React from 'react';
 import styled from 'styled-components';
+import * as colors from 'styles/colors';
 
 export interface ButtonProps {
   label: string;
-  backgroundColor?: string;
-  size?: 'small' | 'medium' | 'large';
+  width?: number;
   onClick?: () => void;
+  type: 'normal' | 'error' | 'disabled'
 }
 
-export const Button = ({label, backgroundColor, onClick, size}: ButtonProps) => {
+export const Button = ({label, onClick, width, type}: ButtonProps) => {
+  const typeBackgroundColor = () => {
+    switch (type) {
+      case 'normal':
+        return colors.da24Blue;
+      case 'error':
+        return colors.error;
+      case 'disabled':
+        return colors.disabled;
+      default:
+        return colors.da24Blue;
+    }
+  }
+
   return (
-    <ButtonWrapper backgroundColor={backgroundColor} size={size} onClick={onClick}>{label}</ButtonWrapper>
+    <StyledButton backgroundColor={typeBackgroundColor()} width={width} onClick={onClick}>{label}</StyledButton>
   )
 };
 
-/*${props => props.status === 'unavailable' && css`
-			background-color:${colors.lineDefault};
-			pointer-events: none;
-		`};*/
-
-const ButtonWrapper = styled.button<{backgroundColor?: string, size?: 'small' | 'medium' | 'large'}>`
-  padding: 10px;
+const StyledButton = styled.button<{backgroundColor?: string , width?: number}>`
+  padding: 16px 31px;
   box-sizing: border-box;
-  background-color: ${props => props.backgroundColor ? props.backgroundColor : 'white'};
- 
+  background-color: ${props => props.backgroundColor ? props.backgroundColor : colors.da24Blue};
+  width: ${props => props.width && `${props.width}px`};
+  font-size: 16px;
+  font-weight: bold;
+  color: ${colors.white};
+  border-radius: 6px;
+  line-height: 24px;
+  letter-spacing: -0.03em;
+  
 `;

@@ -1,30 +1,27 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react';
-import {Button, ButtonProps} from "./Button";
+import {Input, InputProps} from "./Input";
 
 export default {
-  title: 'UI/Button',
-  component: Button,
+  title: 'UI/Input',
+  component: Input,
 } as Meta;
 
-const Template: Story<ButtonProps> = (args) => <Button {...args} />;
+const Template: Story<InputProps> = (args) => <Input {...args} />;
 
 export const Normal = Template.bind({});
 Normal.args = {
-  label: '버튼',
-  type: 'normal',
+  placeholder: '입력하세요',
 };
-
 
 export const Disabled = Template.bind({});
 Disabled.args = {
-  label: '비활성',
-  type: 'disabled',
-
-};
+  placeholder: '비활성',
+  isDisabled: true,
+}
 
 export const Error = Template.bind({});
 Error.args = {
-  label: '오류',
-  type: 'error',
-};
+  placeholder: '에러',
+  isError: true,
+}
